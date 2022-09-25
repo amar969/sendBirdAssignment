@@ -36,7 +36,7 @@
 1. In Assessments 1 and 2, we sent a message after creating new channels. If we do not
 send a message, the channels will not be displayed. Why does this occur? (5 points).
 
--> Because channels is a empty error.
+-> Because channels is an empty error. As per display rule {channel.lastMessage?.message} it will display only if message is present in the channel. Otherwise show nothing
 
 2. We can list channels without messages as well. How do we make this happen? (10
 points).
