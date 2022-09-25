@@ -78,8 +78,10 @@ const BasicGroupChannelSample = (props) => {
         }
 
         channelHandler.onMessageReceived = (channel, message) => {
+            console.log("Line 81",channel, message)
             const updatedMessages = [...stateRef.current.messages, message];
             updateState({ ...stateRef.current, messages: updatedMessages });
+            alert("Message received")
         };
 
         channelHandler.onMessageDeleted = (channel, message) => {
@@ -315,12 +317,15 @@ const ChannelList = ({
                 <button className="channel-create-button" onClick={() => handleLoadMemberSelectionList()}>Create Channel</button>
             </div>
             {channels.map(channel => {
+                // if want to display channel title as member names 
+                // use <ChannelName members={ channel.members} /> 
                 return (
                     <div key={channel.url} className="channel-list-item" >
                         <div
                             className="channel-list-item-name"
                             onClick={() => { handleJoinChannel(channel.url) }}>
-                            <ChannelName members={channel.members} />
+                            
+                            <ChannelName channelCustomType={channel.customType ? channel.name + " " + channel.customType : channel.name} />
                             <div className="last-message">{channel.lastMessage?.message}</div>
                         </div>
                         <div>
@@ -334,22 +339,25 @@ const ChannelList = ({
         </div >);
 }
 
-const ChannelName = ({ members }) => {
-    const membersToDisplay = members.slice(0, 2);
-    const membersNotToDisplay = members.slice(2);
-
+const ChannelName = ({ members, channelCustomType}) => {
+    const channelNameToDisplay = channelCustomType
+    //const membersToDisplay = members.slice(0, 2);
+    //const membersNotToDisplay = members.slice(2);
     return <>
-        {membersToDisplay.map((member) => {
+        {channelNameToDisplay}
+        
+        {/* {membersToDisplay.map((member) => {
             return <span key={member.userId}>{member.nickname}</span>
         })}
-        {membersNotToDisplay.length > 0 && `+ ${membersNotToDisplay.length}`}
+        {membersNotToDisplay.length > 0 && `+ ${membersNotToDisplay.length}`} */}
     </>
 }
 
 const Channel = ({ currentlyJoinedChannel, children, handleLeaveChannel, channelRef }) => {
     if (currentlyJoinedChannel) {
+        //console.log(currentlyJoinedChannel.name + " " + currentlyJoinedChannel.customType)
         return <div className="channel" ref={channelRef}>
-            <ChannelHeader>{currentlyJoinedChannel.name}</ChannelHeader>
+            <ChannelHeader>{currentlyJoinedChannel.customType != "" ? currentlyJoinedChannel.name + " " + currentlyJoinedChannel.customType : currentlyJoinedChannel.name}</ChannelHeader>
             <div>
                 <button className="leave-channel" onClick={handleLeaveChannel}>Leave Channel</button>
             </div>

@@ -344,7 +344,7 @@ const ChannelList = ({
                             <div
                                 className="channel-list-item-name"
                                 onClick={() => { handleJoinChannel(channel.url) }}>
-                                <ChannelName members={channel.members} />
+                                <ChannelName members={ channel.members} />
                                 <div className="last-message">{channel.lastMessage?.message}</div>
                             </div>
                             <div>
@@ -360,10 +360,12 @@ const ChannelList = ({
     );
 }
 
-const ChannelName = ({ members }) => {
+
+const ChannelName = ({ members, channels}) => {
+    //channels.map(channel => <div>channel.customType </div> )
+
     const membersToDisplay = members.slice(0, 2);
     const membersNotToDisplay = members.slice(2);
-
     return <>
         {membersToDisplay.map((member) => {
             return <span key={member.userId}>{member.nickname} </span>
@@ -385,7 +387,7 @@ const Channel = ({ currentlyJoinedChannel, children, handleLeaveChannel, channel
     return <div className="channel"></div>;
 }
 
-const ChannelHeader = ({ children }) => {
+const ChannelHeader = ({ children}) => {
     return <div className="channel-header">{children}</div>;
 }
 
@@ -559,7 +561,7 @@ const CreateUserForm = ({
 // Helpful functions that call Sendbird
 const loadChannels = async () => {
     try {
-        const groupChannelQuery = sb.groupChannel.createMyGroupChannelListQuery({ limit: 30, includeEmpty: true });
+        const groupChannelQuery = sb.groupChannel.createMyGroupChannelListQuery({ limit: 30, customTypesFilter: ["Amarjeet", "u2", "u1"], includeEmpty: true });
         const channels = await groupChannelQuery.next();
         return [channels, null];
     } catch (error) {
