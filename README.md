@@ -35,8 +35,14 @@
 
 1. In Assessments 1 and 2, we sent a message after creating new channels. If we do not
 send a message, the channels will not be displayed. Why does this occur? (5 points).
+
+-> Because channels is a empty error.
+
 2. We can list channels without messages as well. How do we make this happen? (10
 points).
+
+-> Since we are using HOF map to list all channels in our Basic group channel. Our map function returning an array of all the channels irrespestive of whether it contains any messages or not. 
+
 3. In Assessment 4, we generated notifications while viewing the channelList. You could
 also generate push notifications while viewing the conversation. Why should you be
 careful when implementing this type of logic? (15 points).

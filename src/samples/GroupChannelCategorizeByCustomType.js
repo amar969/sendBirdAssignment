@@ -561,7 +561,7 @@ const CreateUserForm = ({
 // Helpful functions that call Sendbird
 const loadChannels = async () => {
     try {
-        const groupChannelQuery = sb.groupChannel.createMyGroupChannelListQuery({ limit: 30, customTypesFilter: ["Amarjeet", "u2", "u1"], includeEmpty: true });
+        const groupChannelQuery = sb.groupChannel.createMyGroupChannelListQuery({ limit: 30, customTypesFilter: ["Amarjeet", "u2", "u1", "b4"], includeEmpty: true });
         const channels = await groupChannelQuery.next();
         return [channels, null];
     } catch (error) {

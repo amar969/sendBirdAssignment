@@ -78,7 +78,7 @@ const BasicGroupChannelSample = (props) => {
         }
 
         channelHandler.onMessageReceived = (channel, message) => {
-            console.log("Line 81",channel, message)
+            //console.log("Line 81",channel, message)
             const updatedMessages = [...stateRef.current.messages, message];
             updateState({ ...stateRef.current, messages: updatedMessages });
             alert("Message received")
