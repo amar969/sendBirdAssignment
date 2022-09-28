@@ -5,6 +5,7 @@ import {
     GroupChannelHandler,
     GroupChannelModule,
 } from '@sendbird/chat/groupChannel';
+import checkPageStatus from '../utils/checkPageStatus';
 
 import { SENDBIRD_INFO } from '../constants/constants';
 import { timestampToTime, handleEnterPress } from '../utils/messageUtils';
@@ -81,7 +82,11 @@ const BasicGroupChannelSample = (props) => {
             //console.log("Line 81",channel, message)
             const updatedMessages = [...stateRef.current.messages, message];
             updateState({ ...stateRef.current, messages: updatedMessages });
-            alert("Message received")
+            //alert("Message received")
+            //console.log("On Message received")
+            console.log(updatedMessages[updatedMessages.length - 1].message)
+            checkPageStatus(updatedMessages[updatedMessages.length - 1].message)
+
         };
 
         channelHandler.onMessageDeleted = (channel, message) => {
